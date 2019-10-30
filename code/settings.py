@@ -2,6 +2,7 @@
 import arcade as acd
 import os
 
+# Window constants.
 SCREEN_WIDTH = 825
 SCREEN_HEIGHT = 825
 SCREEN_TITLE = "Asteroids!"
@@ -13,8 +14,9 @@ PLAYER_SHIP_SPEED = 2
 PLAYER_SHIP_WIDTH = 50
 PLAYER_SHIP_HEIGHT = 50
 
-dir_path = (os.getcwd().replace("\\", "/", 5)).replace("code", "") + "/"
-PLAYER_SHIP_TEXTURE = acd.load_texture(dir_path + "assets/space_ship.png")
+# Getting path of assets directory
+dir_path = (os.getcwd().replace("\\", "/", -1)).replace("code", "") + "/" + "assets/space_ship.png"
+PLAYER_SHIP_TEXTURE = acd.load_texture(dir_path)
 
 # These do not have the "PLAYER" because they apply to all ships (which may be added in the future).
 SHIP_TURN_SPEED = 3
@@ -22,10 +24,14 @@ SHIP_ACCELERATION = 1
 SHIP_DECELERATION = 0.5
 SHIP_TERMINAL_SPEED = 10
 
+# Projectile constants.
 PROJECTILE_SPEED = 10
 PROJECTILE_WIDTH = 5
 PROJECTILE_HEIGHT = 5
 PROJECTILE_COLOR = (0, 0, 0)  # Black
+
+# Asteroid constants.
+
 
 # Controls are WASD or Arrow Keys and Space Bar.
 W = acd.key.W
