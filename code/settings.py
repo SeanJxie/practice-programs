@@ -1,5 +1,6 @@
 # Game settings
 import arcade as acd
+import os
 
 SCREEN_WIDTH = 825
 SCREEN_HEIGHT = 825
@@ -11,7 +12,9 @@ BACKGROUND_COLOR = (255, 255, 255)  # White
 PLAYER_SHIP_SPEED = 2
 PLAYER_SHIP_WIDTH = 50
 PLAYER_SHIP_HEIGHT = 50
-PLAYER_SHIP_TEXTURE = acd.load_texture("assets/space_ship.png")
+
+dir_path = (os.getcwd().replace("\\", "/", 5)).replace("code", "") + "/"
+PLAYER_SHIP_TEXTURE = acd.load_texture(dir_path + "assets/space_ship.png")
 
 # These do not have the "PLAYER" because they apply to all ships (which may be added in the future).
 SHIP_TURN_SPEED = 3
