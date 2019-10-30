@@ -1,4 +1,4 @@
 """
-Asteroids.py
+Asteroids
 - Sean Xie
 """
