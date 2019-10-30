@@ -15,8 +15,8 @@ PLAYER_SHIP_WIDTH = 50
 PLAYER_SHIP_HEIGHT = 50
 
 # Getting path of assets directory
-dir_path = (os.getcwd().replace("\\", "/")).replace("code", "/assets/space_ship.png")
-PLAYER_SHIP_TEXTURE = acd.load_texture(dir_path)
+dir_path = (os.getcwd().replace("\\", "/")).replace("code", "/assets/")
+PLAYER_SHIP_TEXTURE = acd.load_texture(dir_path + "space_ship.png")
 
 # These do not have the "PLAYER" because they apply to all ships (which may be added in the future).
 SHIP_TURN_SPEED = 3
