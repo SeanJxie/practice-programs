@@ -63,7 +63,7 @@ def asteroids():
     #  # Initializing, loading, drawing, and allowing asteroid movement.
     asts = ast.Asteroids(player_ship_pos)
     asts.load()
-    asts.draw(camera=True)
+    asts.exist(camera=True)
 
 
 def camera(dt):
