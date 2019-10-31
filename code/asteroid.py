@@ -38,7 +38,7 @@ class Asteroids:
             asteroid_list.append([self.x, self.y, self.vel_x, self.vel_y,
                                   self.rota_vel, self.angle, self.segments, self.size])
 
-    # TODO: Asteroids are not acting as expected. Fix.
+    # TODO: Asteroids are flashing.
     def draw(self, camera=False):
         # Notice this is the same technique used for projectile drawing.
         for a in asteroid_list:  # Moving and rendering the asteroids using asteroid list.
@@ -53,10 +53,21 @@ class Asteroids:
 
             # Checking if a asteroid moves out of the viewport. If so, it is removed.
             if x_out or y_out:
-                asteroid_list.pop(0)
+                asteroid_list.pop(list_find(asteroid_list, a))
 
             a[0] += a[2]  # x-movement.
             a[1] += a[3]  # y-movement.
             a[5] += a[4]  # rotation.
 
             acd.draw_ellipse_filled(a[0], a[1], a[7], a[7], st.ASTEROID_COLOR, a[5], a[6])
+
+
+# find() doesn't work with 2-dimensional arrays. Here's a temporary fix.
+def list_find(l, f):
+    index = None
+    for i in range(len(l)):
+        if l[i] == f:
+            index = i
+            break
+
+    return index
