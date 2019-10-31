@@ -62,19 +62,25 @@ class Asteroids:
             acd.draw_ellipse_filled(a[0], a[1], a[7], a[7], st.ASTEROID_COLOR, a[5], a[6])
 
             # Collision detection ---
-            # Since asteroids are more circular than rectangular, we will take its side length / 2 as a radius.
+            # Since asteroids are more circular than rectangular, we will take its side length / 1.3 as a radius.
             # Circles are much easier to deal with for collision handling.
-            rc = a[7] / 2  # Define radius of current asteroid.
+            rc = a[7] / 1.3  # Define radius of current asteroid.
 
             # We check that the distance of every other asteroid (from the current one) are not touching.
             for b in asteroid_list:
                 if a != b:  # Make sure we aren't comparing an asteroid to itself.
-                    ro = b[7] / 2  # Define radius of other asteroid.
+                    ro = b[7] / 1.3  # Define radius of other asteroid.
                     dist = ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5  # Good ol' Pythagoras.
                     touch_dist = rc + ro  # The distance for a collision is the sum of the 2 radii.
 
                     if dist <= touch_dist:  # Detect collision.
-                        pass  # TODO: Find a good way to resolve collision.
+                        # For collision resolution, the velocities are simply swapped.
+                        temp_x_vel = a[2]
+                        temp_y_vel = a[3]
+                        a[2] = b[2]
+                        b[2] = temp_x_vel
+                        a[3] = b[3]
+                        b[3] = temp_y_vel
 
 
 # find() doesn't work with 2-dimensional arrays. Here's a temporary fix.
