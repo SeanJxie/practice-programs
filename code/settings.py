@@ -1,6 +1,5 @@
 # Game settings
 import arcade as acd
-import os
 
 # Window constants.
 SCREEN_WIDTH = 825
@@ -11,12 +10,11 @@ BACKGROUND_COLOR = (255, 255, 255)  # White
 
 # There is no color for ship as it is a texture.
 PLAYER_SHIP_SPEED = 2
-PLAYER_SHIP_WIDTH = 50
+PLAYER_SHIP_WIDTH = 30
 PLAYER_SHIP_HEIGHT = 50
 
 # Getting path of assets directory
-dir_path = (os.getcwd().replace("\\", "/")).replace("code", "/assets/")
-PLAYER_SHIP_TEXTURE = acd.load_texture(dir_path + "space_ship.png")
+PLAYER_SHIP_TEXTURE = acd.load_texture("code/space_ship.png")
 
 # These do not have the "PLAYER" because they apply to all ships (which may be added in the future).
 SHIP_TURN_SPEED = 3
@@ -25,7 +23,7 @@ SHIP_DECELERATION = 0.5
 SHIP_TERMINAL_SPEED = 10
 
 # Projectile constants.
-PROJECTILE_SPEED = 8
+PROJECTILE_SPEED = 20
 PROJECTILE_WIDTH = 4
 PROJECTILE_HEIGHT = 10
 PROJECTILE_COLOR = (255, 0, 0)  # Red
@@ -54,9 +52,9 @@ A = acd.key.A
 S = acd.key.S
 D = acd.key.D
 
-Up = acd.key.UP
-Left = acd.key.LEFT
-Down = acd.key.DOWN
-Right = acd.key.RIGHT
+UP = acd.key.UP
+LEFT = acd.key.LEFT
+DOWN = acd.key.DOWN
+RIGHT = acd.key.RIGHT
 
-Space = acd.key.SPACE
+SPACE = acd.key.SPACE
