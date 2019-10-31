@@ -28,7 +28,7 @@ SHIP_TERMINAL_SPEED = 10
 PROJECTILE_SPEED = 8
 PROJECTILE_WIDTH = 4
 PROJECTILE_HEIGHT = 10
-PROJECTILE_COLOR = (0, 0, 0)  # Black
+PROJECTILE_COLOR = (255, 0, 0)  # Red
 
 # Asteroid constants. This will be longer than the others as everything is randomised on a custom range.
 # The number of segments is in range [ASTEROID_SEGMENT_LOWER, ASTEROID_SEGMENT_UPPER).

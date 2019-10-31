@@ -21,13 +21,20 @@ def update(delta_time):  # Might use delta_time in future for frame-rate indepen
     player_ship()
     asteroids()
     camera(delta_time)
-    print(player_ship_pos)
 
 
 def player_ship():
     global player_ship_angle, player_ship_velocity, player_ship_pos, shooting
-    # Initializing, drawing, and allowing ship movement.
+    # Initializing, ship.
     p_ship = ship.PlayerShip(player_ship_pos[0], player_ship_pos[1], player_ship_velocity, player_ship_angle)
+
+    # Shooting.
+    p_ship.draw_projectiles(camera=True)  # Always draw and move projectiles.
+    if shooting:
+        p_ship.shoot()
+        shooting = 0  # Shooting is reset so the ship fires semi-automatic.
+
+    # Allowing ship to move and rendering.
     p_ship.draw()
     p_ship.translation()
 
@@ -50,12 +57,6 @@ def player_ship():
         player_ship_angle += st.SHIP_TURN_SPEED
     if moving_right:
         player_ship_angle -= st.SHIP_TURN_SPEED
-
-    # Shooting.
-    p_ship.draw_projectiles(camera=True)  # Always draw and move projectiles.
-    if shooting:
-        p_ship.shoot()
-        shooting = 0  # Shooting is reset so the ship fires semi-automatic.
 
 
 def asteroids():

@@ -37,21 +37,22 @@ class Asteroids:
             # A dictionary would be nice in this situation. But, I don't want to use one.
             asteroid_list.append([self.x, self.y, self.vel_x, self.vel_y,
                                   self.rota_vel, self.angle, self.segments, self.size])
+            print(asteroid_list)
 
-    # TODO: fix.
+    # TODO: fix buggy asteroids.
     def draw(self, camera=False):
-        for a in asteroid_list:  # Moving and rendering the projectiles using projectile list.
-
-            # Conditions for out-of-viewport projectile.
+        # Notice this is the same technique used for projectile drawing.
+        for a in asteroid_list:  # Moving and rendering the asteroids using asteroid list.
+            # Conditions for out-of-viewport asteroid.
             x_out = a[0] < 0 or a[0] > st.SCREEN_WIDTH
             y_out = a[1] < 0 or a[1] > st.SCREEN_HEIGHT
 
-            # Projectile removal is different when camera tracks ship.
+            # Asteroid removal is different when camera tracks ship.
             if camera:
                 x_out = a[0] < self.x - st.SCREEN_WIDTH / 2 or a[0] > self.x + st.SCREEN_WIDTH / 2
                 y_out = a[1] < self.y - st.SCREEN_HEIGHT / 2 or a[1] > self.y + st.SCREEN_HEIGHT / 2
 
-            # Checking if a projectile moves out of the viewport. If so, it is removed.
+            # Checking if a asteroid moves out of the viewport. If so, it is removed.
             if x_out or y_out:
                 asteroid_list.pop(-1)
 
