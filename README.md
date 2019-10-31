@@ -5,4 +5,4 @@ My own take in the classic Asteroids game. Written in Python.
 - The repository structure may seem messy. I'm trying to figure out how to compile python code ATM.
 # Usage
 Requires Python 3.
-In cmd, ```pip install arcade``` to get arcade library. Download all files and run in IDE of choice.
+In cmd, ```pip install arcade``` to get arcade library. Download all files and run ```main.py``` in IDE of choice.
