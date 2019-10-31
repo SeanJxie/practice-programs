@@ -13,13 +13,13 @@ PLAYER_SHIP_SPEED = 2
 PLAYER_SHIP_WIDTH = 30
 PLAYER_SHIP_HEIGHT = 50
 
-# Getting path of assets directory
+# Texture. It's easier to manipulate this texture than define a 3-point triangle
 PLAYER_SHIP_TEXTURE = acd.load_texture("code/space_ship.png")
 
 # These do not have the "PLAYER" because they apply to all ships (which may be added in the future).
-SHIP_TURN_SPEED = 3
+SHIP_TURN_SPEED = 5
 SHIP_ACCELERATION = 1
-SHIP_DECELERATION = 0.5
+SHIP_DECELERATION = 0.2
 SHIP_TERMINAL_SPEED = 10
 
 # Projectile constants.
@@ -42,19 +42,17 @@ ASTEROID_VEL_LOWER = -2
 ASTEROID_ROTA_UPPER = 3
 ASTEROID_ROTA_LOWER = -3
 # Notice there is no (x, y) position range because it may vary depending in ship position.
-ASTEROID_COLOR = (100, 100, 100)  # Gray
+ASTEROID_COLOR = (200, 200, 200)  # Gray
 # The maximum number of asteroids allowed on screen at once.
 ASTEROID_NUM_CAP = 10
 
-# Controls are WASD or Arrow Keys and Space Bar.
+# Controls are WASD or Arrow Keys and Space Bar. There is no "down" (moving backwards).
 W = acd.key.W
 A = acd.key.A
-S = acd.key.S
 D = acd.key.D
 
 UP = acd.key.UP
 LEFT = acd.key.LEFT
-DOWN = acd.key.DOWN
 RIGHT = acd.key.RIGHT
 
 SPACE = acd.key.SPACE
