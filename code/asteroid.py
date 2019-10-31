@@ -13,13 +13,14 @@ asteroid_list = []
 class Asteroids:
     def __init__(self, ship_pos):
         # (x, y) position is randomized based in player ship position.
-        self.sp = int(ship_pos[0]), int(ship_pos[1])
+        self.spf = ship_pos[0], ship_pos[1]
+        self.spi = int(ship_pos[0]), int(ship_pos[1])
 
-        self.x = rnd.randint(self.sp[0] - st.SCREEN_WIDTH // 2,
-                             self.sp[0] + st.SCREEN_WIDTH // 2)
+        self.x = rnd.randint(self.spi[0] - st.SCREEN_WIDTH // 2,
+                             self.spi[0] + st.SCREEN_WIDTH // 2)
 
-        self.y = rnd.randint(self.sp[1] - st.SCREEN_HEIGHT // 2,
-                             self.sp[1] + st.SCREEN_HEIGHT // 2)
+        self.y = rnd.randint(self.spi[1] - st.SCREEN_HEIGHT // 2,
+                             self.spi[1] + st.SCREEN_HEIGHT // 2)
 
         # Velocity, angle, segment number, and size are randomized.
         self.vel_x = rnd.randint(st.ASTEROID_VEL_LOWER, st.ASTEROID_VEL_UPPER)
@@ -37,7 +38,7 @@ class Asteroids:
             asteroid_list.append([self.x, self.y, self.vel_x, self.vel_y,
                                   self.rota_vel, self.angle, self.segments, self.size])
 
-    # TODO: fix buggy asteroids.
+    # TODO: Asteroids are not acting as expected. Fix.
     def draw(self, camera=False):
         # Notice this is the same technique used for projectile drawing.
         for a in asteroid_list:  # Moving and rendering the asteroids using asteroid list.
@@ -47,8 +48,8 @@ class Asteroids:
 
             # Asteroid removal is different when camera tracks ship.
             if camera:
-                x_out = a[0] < self.x - st.SCREEN_WIDTH / 2 or a[0] > self.x + st.SCREEN_WIDTH / 2
-                y_out = a[1] < self.y - st.SCREEN_HEIGHT / 2 or a[1] > self.y + st.SCREEN_HEIGHT / 2
+                x_out = a[0] < self.spf[0] - st.SCREEN_WIDTH / 2 or a[0] > self.spf[0] + st.SCREEN_WIDTH / 2
+                y_out = a[1] < self.spf[1] - st.SCREEN_HEIGHT / 2 or a[1] > self.spf[1] + st.SCREEN_HEIGHT / 2
 
             # Checking if a asteroid moves out of the viewport. If so, it is removed.
             if x_out or y_out:
