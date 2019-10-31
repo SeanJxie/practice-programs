@@ -5,7 +5,6 @@ Class of asteroid object.
 
 import arcade as acd
 from code import settings as st
-from code import main
 import random as rnd
 
 asteroid_list = []
@@ -37,7 +36,6 @@ class Asteroids:
             # A dictionary would be nice in this situation. But, I don't want to use one.
             asteroid_list.append([self.x, self.y, self.vel_x, self.vel_y,
                                   self.rota_vel, self.angle, self.segments, self.size])
-            print(asteroid_list)
 
     # TODO: fix buggy asteroids.
     def draw(self, camera=False):
@@ -54,7 +52,7 @@ class Asteroids:
 
             # Checking if a asteroid moves out of the viewport. If so, it is removed.
             if x_out or y_out:
-                asteroid_list.pop(-1)
+                asteroid_list.pop(0)
 
             a[0] += a[2]  # x-movement.
             a[1] += a[3]  # y-movement.
