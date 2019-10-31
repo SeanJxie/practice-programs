@@ -34,12 +34,12 @@ class Asteroids:
     def load(self):
         # Appending all asteroids onto the asteroid list.
         if len(asteroid_list) < st.ASTEROID_NUM_CAP:
-            # A dictionary would be nice in this situation. But, I don't want to use one.
+            # A dictionary would be nice in this situation. But, I don't want to use one. Time to memorize indices!
             asteroid_list.append([self.x, self.y, self.vel_x, self.vel_y,
                                   self.rota_vel, self.angle, self.segments, self.size])
 
-    # TODO: Asteroids are flashing.
-    def draw(self, camera=False):
+    # TODO: Asteroids are flashing. Fix.
+    def exist(self, camera=False):  # "exist" ¯\_(ツ)_/¯
         # Notice this is the same technique used for projectile drawing.
         for a in asteroid_list:  # Moving and rendering the asteroids using asteroid list.
             # Conditions for out-of-viewport asteroid.
@@ -60,6 +60,21 @@ class Asteroids:
             a[5] += a[4]  # rotation.
 
             acd.draw_ellipse_filled(a[0], a[1], a[7], a[7], st.ASTEROID_COLOR, a[5], a[6])
+
+            # Collision detection ---
+            # Since asteroids are more circular than rectangular, we will take its side length / 2 as a radius.
+            # Circles are much easier to deal with for collision handling.
+            rc = a[7] / 2  # Define radius of current asteroid.
+
+            # We check that the distance of every other asteroid (from the current one) are not touching.
+            for b in asteroid_list:
+                if a != b:  # Make sure we aren't comparing an asteroid to itself.
+                    ro = b[7] / 2  # Define radius of other asteroid.
+                    dist = ((b[0] - a[0]) ** 2 + (b[1] - a[1]) ** 2) ** 0.5  # Good ol' Pythagoras.
+                    touch_dist = rc + ro  # The distance for a collision is the sum of the 2 radii.
+
+                    if dist <= touch_dist:  # Detect collision.
+                        pass  # TODO: Find a good way to resolve collision.
 
 
 # find() doesn't work with 2-dimensional arrays. Here's a temporary fix.
