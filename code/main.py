@@ -1,6 +1,8 @@
 import arcade as acd
 from code import ship
+from code import asteroid as ast
 from code import settings as st
+from code import camera as cam
 
 # Player variables.
 player_ship_pos = [st.SCREEN_WIDTH / 2, st.SCREEN_HEIGHT / 2]  # Ship spawns at screen center.
@@ -14,9 +16,12 @@ moving_right = 0
 shooting = 0
 
 
-def update(delta_time):
+def update(delta_time):  # Might use delta_time in future for frame-rate independence.
     acd.start_render()  # Rendering starts here instead of deep within some other function.
     player_ship()
+    asteroids()
+    camera(delta_time)
+    print(player_ship_pos)
 
 
 def player_ship():
@@ -52,8 +57,26 @@ def player_ship():
         p_ship.shoot()
         shooting = 0  # Shooting is reset so the ship fires semi-automatic.
 
-    # Camera
-    p_ship.camera_track()
+
+def asteroids():
+    #  # Initializing, loading, drawing, and allowing asteroid movement.
+    asts = ast.Asteroids(player_ship_pos)
+    asts.load()
+    asts.draw(camera=True)
+
+
+def camera(dt):
+    # Creating camera and tracking player.
+    ship_cam = cam.Camera(player_ship_pos[0], player_ship_pos[1])
+    ship_cam.track()
+
+    # Drawing frame rate.
+    cam_center = ship_cam.get_camera_center()
+    fps_x = cam_center[0] - st.SCREEN_WIDTH / 2
+    fps_y = cam_center[1] + st.SCREEN_HEIGHT / 2 - 20
+
+    # Dividing 1 by time between frames (in seconds) to get FPS.
+    acd.draw_text(f"{int(round(1 / dt))} FPS", fps_x, fps_y, acd.color.BLACK, 20)
 
 
 # key_release() basically does the opposite of key_press().

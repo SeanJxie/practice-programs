@@ -53,29 +53,21 @@ class PlayerShip:
         # Adding data to projectile list.
         projectile_list.append([x, y, step_x, step_y, angle])
 
-    # TODO: Fix
-    def camera_track(self):  # Camera centers viewport on ship.
-        acd.set_viewport(
-            self.x - st.SCREEN_WIDTH / 2, self.x + st.SCREEN_WIDTH / 2,
-            self.y - st.SCREEN_HEIGHT / 2, self.y + st.SCREEN_HEIGHT / 2
-        )
-
     def draw_projectiles(self, camera=False):  # No matter what, projectiles are always on screen and moving.
         for p in projectile_list:  # Moving and rendering the projectiles using projectile list.
+
+            # Conditions for out-of-viewport projectile.
+            x_out = p[0] < 0 or p[0] > st.SCREEN_WIDTH
+            y_out = p[1] < 0 or p[1] > st.SCREEN_HEIGHT
+
             # Projectile removal is different when camera tracks ship.
             if camera:
-                # Checking if a projectile moves out of the viewport. If so, it is removed.
                 x_out = p[0] < self.x - st.SCREEN_WIDTH / 2 or p[0] > self.x + st.SCREEN_WIDTH / 2
                 y_out = p[1] < self.y - st.SCREEN_HEIGHT / 2 or p[1] > self.y + st.SCREEN_HEIGHT / 2
-                if x_out or y_out:
-                    projectile_list.pop(0)
 
-            if not camera:
-                # Checking if a projectile moves out of the viewport. If so, it is removed.
-                x_out = (p[0] < 0 or p[0] > st.SCREEN_WIDTH)
-                y_out = (p[1] < 0 or p[1] > st.SCREEN_HEIGHT)
-                if x_out or y_out:
-                    projectile_list.pop(0)
+            # Checking if a projectile moves out of the viewport. If so, it is removed.
+            if x_out or y_out:
+                projectile_list.pop(0)
 
             p[0] += p[2]  # Increase x by x_step.
             p[1] += p[3]  # Increase y by y_step.
