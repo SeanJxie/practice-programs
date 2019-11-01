@@ -6,7 +6,7 @@ SCREEN_WIDTH = 825
 SCREEN_HEIGHT = 825
 SCREEN_TITLE = "Asteroids!"
 MAX_FRAME_RATE = 60  # This is actually the maximum for the arcade library.
-BACKGROUND_COLOR = (255, 255, 255)  # White
+BACKGROUND_COLOR = (0, 0, 0)  # Black
 
 # There is no color for ship as it is a texture.
 PLAYER_SHIP_SPEED = 2
@@ -21,7 +21,7 @@ PLAYER_SHIP_TEXTURE = acd.load_texture("code/space_ship.png")
 SHIP_TURN_SPEED = 5
 SHIP_ACCELERATION = 1
 SHIP_DECELERATION = 0.2
-SHIP_TERMINAL_SPEED = 10
+SHIP_TERMINAL_SPEED = 20
 
 # Projectile constants.
 PROJECTILE_SPEED = 20
@@ -43,7 +43,7 @@ ASTEROID_VEL_LOWER = -2
 ASTEROID_ROTA_UPPER = 3
 ASTEROID_ROTA_LOWER = -3
 # Notice there is no (x, y) position range because it may vary depending in ship position.
-ASTEROID_COLOR = (200, 200, 200)  # Gray
+ASTEROID_COLOR = (100, 100, 100)  # Gray
 # The maximum number of asteroids allowed on screen at once.
 ASTEROID_NUM_CAP = 10  # I love playing with this.
 
