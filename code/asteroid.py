@@ -16,11 +16,23 @@ class Asteroids:
         self.spf = ship_pos[0], ship_pos[1]
         self.spi = int(ship_pos[0]), int(ship_pos[1])
 
+        # This whole chunk of code just makes sure that asteroids don't spawn in st.PLAYER_SHIP_SAFE_RADIUS of the ship.
+        # Should be temporary, I don't like putting while loops in games.
         self.x = rnd.randint(self.spi[0] - st.SCREEN_WIDTH // 2,
                              self.spi[0] + st.SCREEN_WIDTH // 2)
 
         self.y = rnd.randint(self.spi[1] - st.SCREEN_HEIGHT // 2,
                              self.spi[1] + st.SCREEN_HEIGHT // 2)
+        dist_from_ship = ((self.x - ship_pos[0]) ** 2 + (self.y - ship_pos[1]) ** 2) ** 0.5  # Good ol' Pythagoras.
+
+        while dist_from_ship <= st.PLAYER_SHIP_SAFE_RADIUS:  # Keep resetting until asteroid is out of safe radius.
+            self.x = rnd.randint(self.spi[0] - st.SCREEN_WIDTH // 2,
+                                 self.spi[0] + st.SCREEN_WIDTH // 2)
+
+            self.y = rnd.randint(self.spi[1] - st.SCREEN_HEIGHT // 2,
+                                 self.spi[1] + st.SCREEN_HEIGHT // 2)
+
+            dist_from_ship = ((self.x - ship_pos[0]) ** 2 + (self.y - ship_pos[1]) ** 2) ** 0.5  # Good ol' Pythagoras.
 
         # Velocity, angle, segment number, and size are randomized.
         self.vel_x = rnd.randint(st.ASTEROID_VEL_LOWER, st.ASTEROID_VEL_UPPER)
