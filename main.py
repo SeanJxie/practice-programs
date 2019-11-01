@@ -10,7 +10,6 @@ player_ship_angle = 0  # In degrees (ship points north at 0).
 player_ship_velocity = 0
 # Control variables.
 moving_up = 0
-moving_down = 0
 moving_left = 0
 moving_right = 0
 shooting = 0
@@ -82,7 +81,7 @@ def camera(dt):
 
 # key_release() basically does the opposite of key_press().
 def on_key_press(symbol, modifiers):
-    global moving_up, moving_down, moving_left, moving_right, shooting
+    global moving_up, moving_left, moving_right, shooting
     # Rotation of ship.
     if symbol == st.LEFT or symbol == st.A:
         moving_left = 1
@@ -97,7 +96,7 @@ def on_key_press(symbol, modifiers):
 
 
 def on_key_release(symbol, modifiers):
-    global moving_up, moving_down, moving_left, moving_right, shooting
+    global moving_up, moving_left, moving_right, shooting
     # Rotation of ship.
     if symbol == st.LEFT or symbol == st.A:
         moving_left = 0
