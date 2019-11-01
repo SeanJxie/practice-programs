@@ -12,6 +12,7 @@ BACKGROUND_COLOR = (255, 255, 255)  # White
 PLAYER_SHIP_SPEED = 2
 PLAYER_SHIP_WIDTH = 30
 PLAYER_SHIP_HEIGHT = 50
+PLAYER_SHIP_SAFE_RADIUS = 100  # The radius around the ship in which asteroids cannot spawn.
 
 # Texture. It's easier to manipulate this texture than define a 3-point triangle
 PLAYER_SHIP_TEXTURE = acd.load_texture("code/space_ship.png")
@@ -44,7 +45,7 @@ ASTEROID_ROTA_LOWER = -3
 # Notice there is no (x, y) position range because it may vary depending in ship position.
 ASTEROID_COLOR = (200, 200, 200)  # Gray
 # The maximum number of asteroids allowed on screen at once.
-ASTEROID_NUM_CAP = 10
+ASTEROID_NUM_CAP = 10  # I love playing with this.
 
 # Controls are WASD or Arrow Keys and Space Bar. There is no "down" (moving backwards).
 W = acd.key.W
