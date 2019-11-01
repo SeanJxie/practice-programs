@@ -5,6 +5,7 @@ Class of asteroid object.
 
 import arcade as acd
 from code import settings as st
+from code import ship
 import random as rnd
 
 asteroid_list = []
@@ -17,7 +18,7 @@ class Asteroids:
         self.spi = int(ship_pos[0]), int(ship_pos[1])
 
         # This whole chunk of code just makes sure that asteroids don't spawn in st.PLAYER_SHIP_SAFE_RADIUS of the ship.
-        # Should be temporary, I don't like putting while loops in games.
+        # TODO: Should be temporary, I don't like putting while loops in games.
         self.x = rnd.randint(self.spi[0] - st.SCREEN_WIDTH // 2,
                              self.spi[0] + st.SCREEN_WIDTH // 2)
 
@@ -76,7 +77,7 @@ class Asteroids:
             # Collision detection ---
             # Since asteroids are more circular than rectangular, we will take its side length / 1.3 as a radius.
             # Circles are much easier to deal with for collision handling.
-            rc = a[7] / 1.3  # Define radius of current asteroid.
+            rc = a[7] / 1.2  # Define radius of current asteroid.
 
             # We check that the distance of every other asteroid (from the current one) are not touching.
             for b in asteroid_list:
@@ -93,6 +94,19 @@ class Asteroids:
                         b[2] = temp_x_vel
                         a[3] = b[3]
                         b[3] = temp_y_vel
+
+            # Detecting bullet collision.
+            for c in ship.projectile_list:
+                dist = ((c[0] - a[0]) ** 2 + (c[1] - a[1]) ** 2) ** 0.5  # Good ol' Pythagoras.
+
+                if dist <= rc:
+                    temp_x_vel = a[2]
+                    temp_y_vel = a[3]
+                    c[2] = [2]
+                    c[2] = temp_x_vel
+                    a[3] = c[3]
+                    c[3] = temp_y_vel
+                    ship.projectile_list.pop(0)
 
 
 # find() doesn't work with 2-dimensional arrays. Here's a temporary fix.
