@@ -27,6 +27,7 @@ SHIP_TERMINAL_SPEED = 20
 PROJECTILE_SPEED = 20
 PROJECTILE_WIDTH = 4
 PROJECTILE_HEIGHT = 10
+PROJECTILE_MASS = 0.2  # It's called "mass" but it is just the percentage of velocity retained by an asteroid on impact.
 PROJECTILE_COLOR = (255, 0, 0)  # Red
 
 # Asteroid constants. This will be longer than the others as everything is randomised on a custom range.
