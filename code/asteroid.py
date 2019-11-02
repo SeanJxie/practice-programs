@@ -1,6 +1,5 @@
 """
 Class of asteroid object.
-
 """
 
 import arcade as acd
@@ -51,7 +50,7 @@ class Asteroids:
             asteroid_list.append([self.x, self.y, self.vel_x, self.vel_y,
                                   self.rota_vel, self.angle, self.segments, self.size])
 
-    # TODO: Asteroids are flashing. Fix.
+    # TODO: Asteroids are flashing. Fix. Some projectiles are still there after collision.
     def exist(self, camera=False):  # "exist" ¯\_(ツ)_/¯
         # Notice this is the same technique used for projectile drawing.
         for a in asteroid_list:  # Moving and rendering the asteroids using asteroid list.
@@ -99,13 +98,10 @@ class Asteroids:
             for c in ship.projectile_list:
                 dist = ((c[0] - a[0]) ** 2 + (c[1] - a[1]) ** 2) ** 0.5  # Good ol' Pythagoras.
 
-                if dist <= rc:
-                    temp_x_vel = a[2]
-                    temp_y_vel = a[3]
-                    c[2] = [2]
-                    c[2] = temp_x_vel
-                    a[3] = c[3]
-                    c[3] = temp_y_vel
+                if dist <= rc:  # On collision, asteroid velocity becomes projectile velocity * mass.
+                    # It is also assumed that all asteroids have mass 1.
+                    a[2] = c[2] * st.PROJECTILE_MASS
+                    a[3] = c[3] * st.PROJECTILE_MASS
                     ship.projectile_list.pop(0)
 
 
