@@ -34,7 +34,7 @@ class PlayerShip:
     def translation(self):
         # Notice 90 degrees is added to the angle to compensate for the fact
         # that 0 degrees points the ship north (on a "regular" cartesian system 0 degrees is east).
-        # Adds correct quantities of xy-values at the current velocity to allow movement non-axis movement.
+        # Adds correct quantities of xy-values at the current velocity to allow non-axis movement.
         self.x += math.cos(math.radians(self.angle + 90)) * self.vel
         self.y += math.sin(math.radians(self.angle + 90)) * self.vel
 
