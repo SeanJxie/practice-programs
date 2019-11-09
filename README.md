@@ -4,5 +4,5 @@ Playing with collision-detection and other game related things.
 
 # Usage
 - Requires Python 3.
-- Install arcade library.
-- Run in an IDE.
+- Install all files and ```arcade``` library.
+- Run main.py in any IDE.
