@@ -4,5 +4,6 @@ My own take on the classic Asteroids game. Written in Python.
 - Practice project for game development. So, the graphics are polygon-based and RGB defined colors.
 - The repository structure may seem messy. I'm trying to figure out how to compile python code ATM.
 # Usage
-Requires Python 3.
-In cmd, ```pip install arcade``` to get arcade library. Download all files and run ```main.py``` in an IDE of choice.
+- Requires Python 3.
+- Install arcade library.
+- Run in an IDE.
