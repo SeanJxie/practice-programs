@@ -18,12 +18,12 @@ UPDATE_TICK = 1 / 60  # A sixtyth of a second
 
 # Ray trace constants -----
 RAY_DENSITY = 6
-LIGHT_ANGLE_RANGE = 90  # Degrees
+LIGHT_ANGLE_RANGE = [0, 90]  # Degrees
 TRACE_SPEED = 50
 MAX_RAY_LENGTH = 1131
 
 light_source = [0, 0]
-ray_list = [Ray(light_source, math.tan(math.radians(theta)), 1000) for theta in numpy.arange(0, 90, 1 / RAY_DENSITY)]
+ray_list = [Ray(light_source, math.tan(math.radians(theta)), 1000) for theta in numpy.arange(LIGHT_ANGLE_RANGE[0], LIGHT_ANGLE_RANGE[1], 1 / RAY_DENSITY)]
 barriers = [CircleBarrier([400, 400], 150), CircleBarrier([200, 200], 50), CircleBarrier([200, 500], 20)]
 
 ray_tracer = RayTraceEngine(ray_list, barriers, TRACE_SPEED)

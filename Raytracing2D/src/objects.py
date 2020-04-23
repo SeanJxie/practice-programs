@@ -99,5 +99,3 @@ class Renderer:
 # Helpful funtions -----
 def get_dist(p1, p2):
     return math.sqrt((p2[0] - p1[0]) ** 2 + (p2[1] - p1[1]) ** 2)
-
-print(get_dist([0, 0], [800, 800]))
