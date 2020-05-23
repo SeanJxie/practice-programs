@@ -1,4 +1,0 @@
-"""
-Asteroids
-- Sean Xie
-"""
