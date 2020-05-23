@@ -1,2 +1,2 @@
 - RunItDown.exe: A program which ruins your League of Legends experience
-- TicTacToe.exe: Command line Tic Tac Toe
+- tictactoe.exe: Command line Tic Tac Toe
