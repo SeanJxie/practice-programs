@@ -17,10 +17,8 @@ Popen('MSPAINT')
 sc_width, sc_height = pyautogui.size()
 
 # Set up a list of pixel_draw_list[i]s to be coloured in.
-pixel_draw_list = draw_functions.image_scan_col(sc_width / 2, sc_height / 2, 10,
-                                                'Colorwheel_sixcolor.svg.png')
+pixel_draw_list = draw_functions.image_scan_black(sc_width / 2, sc_height / 2, 1, 'test.png')
 
-# Fill the draw list
 sleep(3)
 
 
@@ -38,8 +36,6 @@ def auto_draw():
         if len(pixel_draw_list[i]) == 3:  # Change colour if colour specification is available
             if current_col != pixel_draw_list[i][2] != (255, 255, 255):
                 draw_functions.change_col(pixel_draw_list[i][2])
-
-        print(pixel_draw_list[i])
 
         pyautogui.click(pixel_draw_list[i][0], pixel_draw_list[i][1])
 

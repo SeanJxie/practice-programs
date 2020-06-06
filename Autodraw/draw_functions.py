@@ -1,6 +1,6 @@
 import math
 import numpy
-from pyautogui import click
+from pyautogui import click, size
 from keyboard import press_and_release
 from PIL import Image
 from time import sleep
@@ -18,14 +18,12 @@ def circle(x, y, radius, angle_step, filled=False):
 
     if not filled:
         for theta in numpy.arange(0, 2 * math.pi, angle_step):
-            print(theta)
             point_set.append([math.cos(theta) * radius + x, math.sin(theta) * radius + y])
 
     elif filled:
         current_radius = 0
         while current_radius != radius:
             for theta in numpy.arange(0, 2 * math.pi, angle_step):
-                print(theta)
                 point_set.append([math.cos(theta) * current_radius + x, math.sin(theta) * current_radius + y])
 
             current_radius += 1
@@ -36,7 +34,7 @@ def circle(x, y, radius, angle_step, filled=False):
 
 def change_col(rgb_col):
     """Manually changes paint colour"""
-    button_pos = (2403, 174)
+    button_pos = (size()[0] / 1.598, size()[1] / 12.414)
     click(button_pos[0], button_pos[1])
 
     # Change keypress sequence
@@ -83,10 +81,12 @@ def image_scan_col(x, y, step: int, file):
     return point_set
 
 
-def image_scan_black(x, y, black_range, step: int, file):
+def image_scan_black(x, y, step: int, file):
     # Open file and read get access to pixel values
     im = Image.open(file)
     pixels = im.load()
+
+    black_range = [0, 1]
 
     # Get dimensions of image for scanning
     wt, ht = im.size
