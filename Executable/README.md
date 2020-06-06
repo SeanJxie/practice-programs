@@ -1,2 +1,3 @@
 - RunItDown.exe: A program which ruins your League of Legends experience
 - tictactoe.exe: Command line Tic Tac Toe
+- wifi.exe: Gives you wifi (the ones you've previously connected to) passwords.
