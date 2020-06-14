@@ -1,5 +1,5 @@
 from math import sin, cos, atan2
-from arcade import start_render, buffered_draw_commands, render, draw_texture_rectangle, load_texture, create_ellipse_outline
+from arcade import start_render, buffered_draw_commands, render, draw_texture_rectangle, load_texture
 
 """
 
