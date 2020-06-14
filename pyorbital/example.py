@@ -9,10 +9,9 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 # Initialize planets
-planet_list = [engine.Planet([randint(0, WIN_SIZE[0]), randint(0, WIN_SIZE[1])], randint(10, 100), 50, BLACK) for _ in
-               range(10)]
+planet_list = []
 
-system = engine.PlanetarySystem(planet_list, gravitational_constant=1, new_planet_on_collision=False)
+system = engine.PlanetarySystem(planet_list, gravitational_constant=1, new_planet_on_collision=True)
 
 
 def update(delta_time):
