@@ -1,1 +1,1 @@
-An engine for 2D planetary simulations for the [arcade game development library](https://arcade.academy/)
+A small 2D planetary simulation engine for the [arcade game development library](https://arcade.academy/)
