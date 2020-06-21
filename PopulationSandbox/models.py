@@ -1,4 +1,4 @@
-from PopulationSandbox.data_sets import no_distribution_data
+from PopulationSandbox.data_sets import data1
 from random import choice, randint
 
 
@@ -23,6 +23,9 @@ def human_generator_no_distribution(n):
     """An elementary model which has no weighted distributions"""
     humans = []
 
+    working_age = 16
+    retirement_age = 65
+
     for _ in range(n):
         gender = choice(['Male', 'Female'])  # Not very politically correct but give me a break
         age = randint(0, 100)
@@ -30,10 +33,14 @@ def human_generator_no_distribution(n):
         humans.append(
             Human(
                 gender=gender,
-                f_name=choice(no_distribution_data.male_first_names) if gender == 'Male' else choice(no_distribution_data.female_first_names),
-                l_name=choice(no_distribution_data.surnames),
+                
+                f_name=choice(data1.male_first_names) if gender == 'Male' else choice(data1.female_first_names),
+
+                l_name=choice(data1.surnames),
+
                 age=age,
-                occupation=choice(no_distribution_data.occupations) if age > 16 else 'Unemployed'
+
+                occupation=choice(data1.occupations) if working_age <= age <= retirement_age else 'Unemployed'
             )
         )
 
