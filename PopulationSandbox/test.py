@@ -2,8 +2,7 @@ from PopulationSandbox import models
 
 POPULATION_SIZE = 1000000
 
-population = models.HumanGeneratorNoDistribution(population_size=POPULATION_SIZE)
+my_pop = models.HumanGeneratorNoDistribution(population_size=POPULATION_SIZE)
 
-
-for human in population.get_population():
+for human in my_pop.get_filtered_population(f_name=('Sean', 'Kevin'), l_name=('Xie', 'Hess')):
     human.display_info()

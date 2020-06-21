@@ -79,7 +79,6 @@ male_first_names = [
     'Westley', 'Yousef', 'Jaxxon', 'Yahir', 'Ishaan', 'Van', 'Westin', 'Valentin', 'Gatlin', 'Xzavier', 'Kylo', 'Kyng', 'Wallace',
     'Zayd', 'Ulises', 'Wesson', 'Deshawn', 'Jaxx', 'Imran', 'Willie', 'Krew', 'Ignacio', 'Vivaan', 'Vance', 'Idris', 'Ira',
     'Ahmir', 'Immanuel', 'Rafferty'
-
 ]
 
 female_first_names = [
@@ -204,7 +203,7 @@ surnames = [
     'Geske', 'Griffo', 'Glunt', 'Golden', 'Gardel', 'Gribble', 'Grell', 'Gearey', 'Grooms', 'Glaser', 'Greer', 'Geel',
     'Gallagher', 'Glick', 'Graber', 'Gore', 'Gabbard', 'Gelpi', 'Gilardi', 'Goddard', 'Gabel', 'Hyde', 'Hood', 'Hull', 'Hogan',
     'Hitchens', 'Higgins', 'Hodder', 'Huxx', 'Hester', 'Huxley', 'Hess', 'Hutton', 'Hobgood', 'Husher', 'Hitchcock', 'Huffman',
-    'Herrera', 'Humber', 'Hobbs', 'Hostetler', 'Henn', 'Horry', 'Hightower', 'Hindley', 'Hitchens', 'Holiday', 'Holland',
+    'Herrera', 'Humber', 'Hobbs', 'Hostetler', 'Henn', 'Horry', 'Hightower', 'Hindley', 'Holiday', 'Holland',
     'Hitchcock', 'Hoagland', 'Hilliard', 'Harvick', 'Hardison', 'Hickey', 'Heller', 'Hartman', 'Halliwell', 'Hughes', 'Hart',
     'Healy', 'Head', 'Harper', 'Hibben', 'Harker', 'Hatton', 'Hawk', 'Hardy', 'Hadwin', 'Hemmings', 'Hembree', 'Helbig', 'Hardin',
     'Hammer', 'Hammond', 'Haystack', 'Howell', 'Hatcher', 'Hamilton', 'Halleck', 'Hooper', 'Hartsell', 'Henderson', 'Hale',
@@ -224,8 +223,8 @@ surnames = [
     'Morikowa', 'Mahan', 'Necessary', 'Nicely', 'Nejem', 'Nunn', 'Neiderman', 'Naillon', 'Nyland', 'Novak', 'Nygard', 'Norwood',
     'Norris', 'Namath', 'Nabor', 'Nash', 'Noonan', 'Nolan', 'Nystrom', 'Niles', 'Napier', 'Nunley', 'Nighy', 'Overholt',
     'Ogletree', 'Opilio', 'October', 'Ozu', "O'Rourke", 'Owusu', 'Oduya', 'Oaks', 'Odenkirk', 'Ottinger', "O'Donnell", 'Orton',
-    'Oakley', 'Oswald', 'Ortega', 'Ogle', 'Orr', 'Ogden', 'Onassis', 'Olson', 'Ollenrenshaw', "O'Leary", "O'Brien", 'Oldman',
-    "O'Bannon", 'Oberman', "O'Malley", 'Otto', 'Oshima', 'Prado', 'Prunk', 'Piper', 'Putnam', 'Pittman', 'Post', 'Price',
+    'Oakley', 'Oswald', 'Ortega', 'Ogle', 'Orr', 'Ogden', 'Onassis', 'Olson', 'Olsen', 'Ollenrenshaw', "O'Leary", "O'Brien",
+    'Oldman', "O'Bannon", 'Oberman', "O'Malley", 'Otto', 'Oshima', 'Prado', 'Prunk', 'Piper', 'Putnam', 'Pittman', 'Post', 'Price',
     'Plunkett',
     'Pitcher', 'Pinzer', 'Punch', 'Paxton', 'Powers', 'Previn', 'Pulman', 'Puller', 'Peck', 'Pepin', 'Platt', 'Powell', 'Pawar',
     'Pinder', 'Pickering', 'Pollock', 'Perrin', 'Pell', 'Pavlov', 'Patterson', 'Perabo', 'Patnick', 'Panera', 'Prescott',

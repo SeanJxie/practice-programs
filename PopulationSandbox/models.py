@@ -48,48 +48,21 @@ class HumanGeneratorNoDistribution:
         return self.population
 
     # Filters
-    def filter_population_by_full_name(self, f_name, l_name):
-        filtered_pop = []
+    def get_filtered_population(self, gender=(), f_name=(), l_name=(), age=()):
 
-        for human in self.population:
-            if human.f_name == f_name and human.l_name == l_name:
-                filtered_pop.append(human)
+        filtered_pop = self.population
 
-        return filtered_pop
+        if gender:
+            filtered_pop = list(filter(lambda human: human.gender in gender, filtered_pop))
 
-    def filter_population_by_f_name(self, name):
-        filtered_pop = []
+        if f_name:
+            filtered_pop = list(filter(lambda human: human.f_name in f_name, filtered_pop))
 
-        for human in self.population:
-            if human.f_name == name:
-                filtered_pop.append(human)
+        if l_name:
+            filtered_pop = list(filter(lambda human: human.l_name in l_name, filtered_pop))
 
-        return filtered_pop
-
-    def filter_population_by_l_name(self, name):
-        filtered_pop = []
-
-        for human in self.population:
-            if human.l_name == name:
-                filtered_pop.append(human)
-
-        return filtered_pop
-
-    def filter_population_by_age(self, age):
-        filtered_pop = []
-
-        for human in self.population:
-            if human.age == age:
-                filtered_pop.append(human)
-
-        return filtered_pop
-
-    def filter_population_by_employment(self):
-        filtered_pop = []
-
-        for human in self.population:
-            if human.occupation != 'Unemployed':
-                filtered_pop.append(human)
+        if age:
+            filtered_pop = list(filter(lambda human: human.age in age, filtered_pop))
 
         return filtered_pop
 
