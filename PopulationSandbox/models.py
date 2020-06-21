@@ -12,8 +12,8 @@ class Human:
 
     def display_info(self):
         print(f'Gender: {self.gender}')
-        print(f'Name: {self.f_name + " " + self.l_name}')
-        print(f'Age: {self.age}')
+        print(f'Name: {self.f_name} {self.l_name}')
+        print(f'Age: {self.age} years')
         print(f'Occupation: {self.occupation}')
 
         print()
@@ -95,7 +95,7 @@ class HumanGeneratorNoDistribution:
 
     @property
     def working_age(self):
-        return 16
+        return 21
 
     @property
     def retirement_age(self):

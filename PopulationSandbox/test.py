@@ -1,6 +1,6 @@
 from PopulationSandbox import models
 
-POPULATION_SIZE = 100000
+POPULATION_SIZE = 1000000
 
 population = models.HumanGeneratorNoDistribution(population_size=POPULATION_SIZE)
 
