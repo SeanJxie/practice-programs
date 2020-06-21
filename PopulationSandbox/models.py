@@ -19,29 +19,84 @@ class Human:
         print()
 
 
-def human_generator_no_distribution(n):
+class HumanGeneratorNoDistribution:
     """An elementary model which has no weighted distributions"""
-    humans = []
 
-    working_age = 16
-    retirement_age = 65
+    def __init__(self, population_size):
+        self.population_size = population_size
+        self.population = []
 
-    for _ in range(n):
-        gender = choice(['Male', 'Female'])  # Not very politically correct but give me a break
-        age = randint(0, 100)
+        for _ in range(self.population_size):
+            gender = choice(['Male', 'Female'])  # Not very politically correct but give me a break
+            age = randint(0, 100)
 
-        humans.append(
-            Human(
-                gender=gender,
-                
-                f_name=choice(data1.male_first_names) if gender == 'Male' else choice(data1.female_first_names),
+            self.population.append(
+                Human(
+                    gender=gender,
 
-                l_name=choice(data1.surnames),
+                    f_name=choice(data1.male_first_names) if gender == 'Male' else choice(data1.female_first_names),
 
-                age=age,
+                    l_name=choice(data1.surnames),
 
-                occupation=choice(data1.occupations) if working_age <= age <= retirement_age else 'Unemployed'
+                    age=age,
+
+                    occupation=choice(data1.occupations) if self.working_age <= age <= self.retirement_age else 'Unemployed'
+                )
             )
-        )
 
-    return humans
+    def get_population(self):
+        return self.population
+
+    # Filters
+    def filter_population_by_full_name(self, f_name, l_name):
+        filtered_pop = []
+
+        for human in self.population:
+            if human.f_name == f_name and human.l_name == l_name:
+                filtered_pop.append(human)
+
+        return filtered_pop
+
+    def filter_population_by_f_name(self, name):
+        filtered_pop = []
+
+        for human in self.population:
+            if human.f_name == name:
+                filtered_pop.append(human)
+
+        return filtered_pop
+
+    def filter_population_by_l_name(self, name):
+        filtered_pop = []
+
+        for human in self.population:
+            if human.l_name == name:
+                filtered_pop.append(human)
+
+        return filtered_pop
+
+    def filter_population_by_age(self, age):
+        filtered_pop = []
+
+        for human in self.population:
+            if human.age == age:
+                filtered_pop.append(human)
+
+        return filtered_pop
+
+    def filter_population_by_employment(self):
+        filtered_pop = []
+
+        for human in self.population:
+            if human.occupation != 'Unemployed':
+                filtered_pop.append(human)
+
+        return filtered_pop
+
+    @property
+    def working_age(self):
+        return 16
+
+    @property
+    def retirement_age(self):
+        return 65

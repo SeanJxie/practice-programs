@@ -1,8 +1,9 @@
 from PopulationSandbox import models
 
-POPULATION_SIZE = 100
+POPULATION_SIZE = 100000
 
-population = models.human_generator_no_distribution(n=POPULATION_SIZE)
+population = models.HumanGeneratorNoDistribution(population_size=POPULATION_SIZE)
 
-for human in population:
+
+for human in population.get_population():
     human.display_info()
