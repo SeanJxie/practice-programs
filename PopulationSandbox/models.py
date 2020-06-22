@@ -19,14 +19,42 @@ class Human:
         print()
 
 
-class HumanGeneratorNoDistribution:
-    """An elementary model which has no weighted distributions"""
-
-    def __init__(self, population_size):
-        self.population_size = population_size
+class Population:
+    def __init__(self, size):
+        self.size = size
         self.population = []
 
-        for _ in range(self.population_size):
+    # Filters
+    def get_filtered_population(self, gender=(), f_name=(), l_name=(), age=()):
+        print('here')
+        filtered_pop = self.population
+
+        if gender:
+            filtered_pop = list(filter(lambda human: human.gender in gender, filtered_pop))
+
+        if f_name:
+            filtered_pop = list(filter(lambda human: human.f_name in f_name, filtered_pop))
+
+        if l_name:
+            filtered_pop = list(filter(lambda human: human.l_name in l_name, filtered_pop))
+
+        if age:
+            filtered_pop = list(filter(lambda human: human.age in age, filtered_pop))
+
+        return filtered_pop
+
+    def get_population(self):
+        return self.population
+
+
+class PopulationNoDistribution(Population):
+    """An elementary model which has no weighted distributions"""
+
+    def __init__(self, size):
+        super().__init__(size)
+
+    def calculate_population(self):
+        for _ in range(self.size):
             gender = choice(['Male', 'Female'])  # Not very politically correct but give me a break
             age = randint(0, 100)
 
@@ -43,28 +71,6 @@ class HumanGeneratorNoDistribution:
                     occupation=choice(data1.occupations) if self.working_age <= age <= self.retirement_age else 'Unemployed'
                 )
             )
-
-    def get_population(self):
-        return self.population
-
-    # Filters
-    def get_filtered_population(self, gender=(), f_name=(), l_name=(), age=()):
-
-        filtered_pop = self.population
-
-        if gender:
-            filtered_pop = list(filter(lambda human: human.gender in gender, filtered_pop))
-
-        if f_name:
-            filtered_pop = list(filter(lambda human: human.f_name in f_name, filtered_pop))
-
-        if l_name:
-            filtered_pop = list(filter(lambda human: human.l_name in l_name, filtered_pop))
-
-        if age:
-            filtered_pop = list(filter(lambda human: human.age in age, filtered_pop))
-
-        return filtered_pop
 
     @property
     def working_age(self):
