@@ -2,7 +2,7 @@ from itertools import combinations
 
 """
 
-For Extended Essay calculations.
+Tools for Extended Essay tests.
 
 """
 
