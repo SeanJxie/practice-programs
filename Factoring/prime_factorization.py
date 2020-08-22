@@ -23,21 +23,24 @@ def prime_factors(n):
 
         return prime
 
-    new_n = n
-    while 1:
-        split = pc_split(new_n)
-        new_n = split[1]
-        ends.append(split[0])
+    if n <= 1:
+        return None
 
-        if is_prime(split[0]) and is_prime(split[1]):
-            ends.append(split[1])
-            break
+    else:
+        while 1:
+            split = pc_split(n)
+            n = split[1]
+            ends.append(split[0])
 
-    return ends
+            if is_prime(split[0]) and is_prime(split[1]):
+                ends.append(split[1])
+                break
+
+        return ends
 
 
 t1 = time()
-print(prime_factors(9999999999999))
+print(prime_factors(-2))
 t2 = time()
 
 print(f"Factorization took {t2 - t1} secs")
