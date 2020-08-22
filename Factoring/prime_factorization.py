@@ -2,8 +2,6 @@ from time import time
 
 
 def prime_factors(n):
-    ends = []
-
     def pc_split(i):
         p = 2
         while i % p != 0:
@@ -23,7 +21,9 @@ def prime_factors(n):
 
         return prime
 
-    if n <= 1:
+    ends = []
+
+    if n == 1:
         return None
 
     else:
@@ -32,7 +32,7 @@ def prime_factors(n):
             n = split[1]
             ends.append(split[0])
 
-            if is_prime(split[0]) and is_prime(split[1]):
+            if is_prime(split[1]):
                 ends.append(split[1])
                 break
 
@@ -40,7 +40,7 @@ def prime_factors(n):
 
 
 t1 = time()
-print(prime_factors(-2))
+print(prime_factors(999999999999))
 t2 = time()
 
 print(f"Factorization took {t2 - t1} secs")
