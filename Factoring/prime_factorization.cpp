@@ -6,7 +6,7 @@ using namespace std;
 
 vector<unsigned long long> pcSplit(unsigned long long i)
 {
-    unsigned long long p = 2;
+    int p = 2;
     while(i % p != 0)
     {
         p++;
@@ -32,9 +32,9 @@ bool isPrime(unsigned long long j)
     return prime;
 }
 
-vector<unsigned long long> primeFactors(unsigned long long n)
+vector<int> primeFactors(unsigned long long n)
 {
-    vector<unsigned long long> ends;
+    vector<int> ends;
 
     if (n <= 1)
     {
@@ -61,7 +61,7 @@ vector<unsigned long long> primeFactors(unsigned long long n)
     return ends;
 }
 
-string printVector(vector<unsigned long long> vec)
+string printVector(vector<int> vec)
 {
     for(int i = 0; i < vec.size(); ++i)
         cout << vec[i] << ' ';
@@ -74,7 +74,7 @@ int main()
     cout << "Number to factor: ";
     cin >> toFactor;
 
-    vector<unsigned long long> primeFactorization = primeFactors(toFactor);
+    vector<int> primeFactorization = primeFactors(toFactor);
     printVector(primeFactorization);
 
     return 0;
