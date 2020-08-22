@@ -35,18 +35,27 @@ vector<int> primeFactors(int n)
 {
     vector<int> ends;
 
-    while (true)
+    if (n <= 1)
     {
-        vector<int> split = pcSplit(n);
-        ends.push_back(split[0]);
-        n = split[1];
+        return ends;
+    }
 
-        if (isPrime(split[0]) && isPrime(split[1]))
+    else
+    {
+    while (true)
         {
-            ends.push_back(split[1]);
-            break;
+            vector<int> split = pcSplit(n);
+            ends.push_back(split[0]);
+            n = split[1];
+
+            if (isPrime(split[0]) && isPrime(split[1]))
+            {
+                ends.push_back(split[1]);
+                break;
+            }
         }
     }
+
 
     return ends;
 }
