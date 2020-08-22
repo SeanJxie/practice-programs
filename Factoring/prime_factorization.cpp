@@ -49,7 +49,7 @@ vector<unsigned long long> primeFactors(unsigned long long n)
             ends.push_back(split[0]);
             n = split[1];
 
-            if (isPrime(split[0]) && isPrime(split[1]))
+            if (isPrime(split[1]))
             {
                 ends.push_back(split[1]);
                 break;
