@@ -4,23 +4,24 @@
 
 using namespace std;
 
-vector<int> pcSplit(int i)
+vector<unsigned long long> pcSplit(unsigned long long i)
 {
-    int p = 2;
+    unsigned long long p = 2;
     while(i % p != 0)
     {
         p++;
     }
 
-    vector<int> ret = {p, i / p};
+    vector<unsigned long long> ret = {p, i / p};
     return ret;
 }
 
-bool isPrime(int j)
+//18446744073709551615
+bool isPrime(unsigned long long j)
 {
     bool prime = true;
 
-    for (int div = 2; div <= pow(j, 0.5); div++)
+    for (unsigned long long div = 2; div <= pow(j, 0.5); div++)
     {
         if (j % div == 0)
         {
@@ -31,9 +32,9 @@ bool isPrime(int j)
     return prime;
 }
 
-vector<int> primeFactors(int n)
+vector<unsigned long long> primeFactors(unsigned long long n)
 {
-    vector<int> ends;
+    vector<unsigned long long> ends;
 
     if (n <= 1)
     {
@@ -44,7 +45,7 @@ vector<int> primeFactors(int n)
     {
     while (true)
         {
-            vector<int> split = pcSplit(n);
+            vector<unsigned long long> split = pcSplit(n);
             ends.push_back(split[0]);
             n = split[1];
 
@@ -60,7 +61,7 @@ vector<int> primeFactors(int n)
     return ends;
 }
 
-string printVector(vector<int> vec)
+string printVector(vector<unsigned long long> vec)
 {
     for(int i = 0; i < vec.size(); ++i)
         cout << vec[i] << ' ';
@@ -68,11 +69,13 @@ string printVector(vector<int> vec)
 
 int main()
 {
-    int toFactor;
+    unsigned long long toFactor;
 
     cout << "Number to factor: ";
     cin >> toFactor;
 
-    vector<int> primeFactorization = primeFactors(toFactor);
+    vector<unsigned long long> primeFactorization = primeFactors(toFactor);
     printVector(primeFactorization);
+
+    return 0;
 }
