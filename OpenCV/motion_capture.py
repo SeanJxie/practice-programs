@@ -2,7 +2,7 @@ import cv2
 
 """
 
-Motion Capture
+Motion Detect
 
 """
 
