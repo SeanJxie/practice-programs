@@ -64,7 +64,7 @@ class Number:
 
     def fraction_form(self):
         """
-        Obtain self.value in a form a / b via the Farey algorithm to the accuracy of float type.
+        Obtain self.value in a form a / b via the Farey algorithm to the accuracy of Python's float type.
         :return: Numerator and denominator (a, b) as a tuple, respectively.
         """
         if self.get_type() == float:
