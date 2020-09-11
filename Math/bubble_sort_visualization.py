@@ -10,7 +10,7 @@ A visualization of the Bubble Sort algorithm using rectangles.
 """
 
 # Colors
-WINDOW = (700, 700)
+WINDOW = (2000, 700)
 RED = (255, 0, 0)
 WHITE = (255, 255, 255)
 GRAY = (50, 50, 50)
@@ -25,7 +25,7 @@ def visualize_list(surface, l):
 	scale_factor = WINDOW[1] / max([e[0] for e in l])
 
 	for value in l:
-		pygame.draw.rect(surface, value[1], (x, 0, rect_width, value[0] * scale_factor))
+		pygame.draw.rect(surface, value[1], (x, WINDOW[1], rect_width, -value[0] * scale_factor))
 		x += rect_width
 
 
@@ -55,8 +55,7 @@ def main():
 	WINDOW_SURFACE = pygame.display.set_mode(WINDOW)
 	pygame.display.set_caption("Bubble Sort Visualization")
 
-	input_list = generate_random_int_input_list(n=1000, inclusiveMin=0, inclusiveMax=255)
-
+	input_list = generate_random_int_input_list(n=500, inclusiveMin=1, inclusiveMax=10000)
 
 	SORT_TICK_INTERVAL = 1
 	tick_count = 1
