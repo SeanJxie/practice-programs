@@ -48,6 +48,11 @@ def bubble_sort_single_iter(lst):
 
 	return lst
 
+def draw_title(surface):
+	font = pygame.font.SysFont('Ariel', 200)
+	text_surface = font.render('Bubble Sort', True, SPECIAL_COL)
+
+	surface.blit(text_surface, (50, 200))
 
 
 def main():
@@ -55,10 +60,14 @@ def main():
 	WINDOW_SURFACE = pygame.display.set_mode(WINDOW)
 	pygame.display.set_caption("Bubble Sort Visualization")
 
-	input_list = generate_random_int_input_list(n=500, inclusiveMin=1, inclusiveMax=10000)
+	input_list = generate_random_int_input_list(n=250, inclusiveMin=1, inclusiveMax=10000)
 
+	# Timing
+	MAX_FPS = 60
 	SORT_TICK_INTERVAL = 1
 	tick_count = 1
+
+	clock = pygame.time.Clock()
 
 	while 1:
 		for event in pygame.event.get():
@@ -73,7 +82,10 @@ def main():
 
 		WINDOW_SURFACE.fill(WHITE)
 		visualize_list(WINDOW_SURFACE, input_list)
+		draw_title(WINDOW_SURFACE)
 		pygame.display.update()
+		clock.tick(MAX_FPS)
+		print(f"FPS: {clock.get_fps()}", end="\r")
 		tick_count += 1
 
 
