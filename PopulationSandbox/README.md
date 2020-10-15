@@ -1,1 +1,1 @@
-Playing around with probability distribution and large sets of data
+Playing around with large sets of data
