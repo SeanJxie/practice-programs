@@ -16,11 +16,18 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:  # Create socket ob
             print('Connected by:', address)
 
             while True:
-                data = connection.recv(DATA_BUFFER_SIZE)  # Max number of byte data to send
-                print("Received:", str(data, encoding='utf-8'))
+                try:
+                    data = connection.recv(DATA_BUFFER_SIZE)  # Max number of byte data to send
+                    print("Received:", str(data, encoding='utf-8'))
+
+                except (ConnectionResetError, OSError) as e:
+                    print(address, "has disconnected")
+                    break
 
                 try:
                     connection.sendall(bytes(input("Send: "), encoding='utf-8'))
                 except ConnectionResetError:
                     print(address, "has disconnected")
                     break
+
+        break
