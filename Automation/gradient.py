@@ -24,7 +24,9 @@ def draw_data(avg_array, img_size):
         draw.rectangle((botLeftX, botLeftY, topRightX, topRightY), fill=tuple(reversed([round(e) for e in avg_array[i][:3]])))
         i += 1
 
-    img.save(os.getcwd() + "//output.jpg")
+    pathName = os.getcwd() + f"//gradient{time.time()}.jpg"
+    img.save(pathName)
+    return pathName
 
 
 def get_data():
@@ -74,6 +76,6 @@ if __name__ == '__main__':
         size = (int(input("Enter output image width: ")), int(input("Enter output image height: ")))
 
     avg = get_data()
-    draw_data(avg, size)
+    path = draw_data(avg, size)
 
-    print(f"Done! Image has been saved to the directory {os.getcwd()}")
+    print(f"Done! Image has been saved with path {path}")
