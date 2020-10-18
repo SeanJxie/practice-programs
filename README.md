@@ -1,1 +1,1 @@
-A whole bunch of random projects a may have written for programming practice
+A whole bunch of random projects I have written for programming practice
