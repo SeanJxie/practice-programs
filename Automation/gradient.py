@@ -26,6 +26,7 @@ def draw_data(avg_array, img_size):
 
     pathName = os.getcwd() + f"//gradient{time.time()}.jpg"
     img.save(pathName)
+
     return pathName
 
 
@@ -40,27 +41,29 @@ def get_data():
         print("Interval time must be greater than or equal to one and less than or equal to total capture time")
         intervalTime = int(input("Interval time between captures (seconds): "))
 
-    timePassed = 0
     averages = []
     cam = cv2.VideoCapture(0)
 
     print("Starting capture...")
-    while timePassed < captureTime:
-        iterStartTime = time.time()
+    startTime = time.time()
+
+    while time.time() - startTime < captureTime:
 
         _, frame = cam.read()  # BGR format
-        cv2.imshow("frame", frame)
+        # cv2.imshow("frame", frame)
+
+        # t1 and t2 determine the avg calculation time
+        t1 = time.time()
         averages.append(cv2.mean(frame))
-        print(f"Frame captured at {timePassed} seconds")
-        time.sleep(intervalTime)
+        t2 = time.time()
+
+        print(f"Frame processed at {time.time() - startTime} seconds")
+
+        if (t2 - t1) < intervalTime:  # If (t2 - t1) > intervalTime, the given intervalTime, obviously, will not be met.
+            time.sleep(intervalTime - (t2 - t1))
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-
-        iterEndTime = time.time()
-        timeDiff = iterEndTime - iterStartTime
-
-        timePassed += timeDiff  # If timeDiff > intervalTime, the intervalTime, obviously, will not be met.
 
     cam.release()
     cv2.destroyAllWindows()
