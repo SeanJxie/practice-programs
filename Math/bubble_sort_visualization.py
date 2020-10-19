@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 
+
 """
 
 A visualization of the Bubble Sort algorithm using rectangles.
@@ -41,10 +42,7 @@ def generate_random_int_input_list(n, inclusiveMin, inclusiveMax):
 def bubble_sort_single_iter(lst):
 	for i in range(1, len(lst)):
 		if lst[i - 1][0] > lst[i][0]:
-			temp = lst[i - 1][0]
-			lst[i - 1][0] = lst[i][0]
-			lst[i][0] = temp
-
+			lst[i - 1][0], lst[i][0] = lst[i][0], lst[i - 1][0]
 
 	return lst
 
@@ -52,18 +50,19 @@ def draw_title(surface):
 	font = pygame.font.SysFont('Ariel', 200)
 	text_surface = font.render('Bubble Sort', True, SPECIAL_COL)
 
-	surface.blit(text_surface, (50, 200))
+	surface.blit(text_surface, (50, 50))
 
 
 def main():
 	pygame.init()
 	WINDOW_SURFACE = pygame.display.set_mode(WINDOW)
 	pygame.display.set_caption("Bubble Sort Visualization")
+	fullscreen = False
 
-	input_list = generate_random_int_input_list(n=250, inclusiveMin=1, inclusiveMax=10000)
+	input_list = generate_random_int_input_list(n=500, inclusiveMin=1, inclusiveMax=1000)
 
 	# Timing
-	MAX_FPS = 60
+	MAX_FPS = 120
 	SORT_TICK_INTERVAL = 1
 	tick_count = 1
 
@@ -75,6 +74,18 @@ def main():
 				pygame.display.quit()
 				sys.exit()
 
+			if event.type == pygame.KEYDOWN:
+				if event.key == pygame.K_f and not fullscreen:
+					pygame.display.quit()
+					WINDOW_SURFACE = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+					fullscreen = not fullscreen
+
+				elif event.key == pygame.K_f and fullscreen:
+					pygame.display.quit()
+					WINDOW_SURFACE = pygame.display.set_mode(WINDOW)
+					fullscreen = not fullscreen
+
+
 		if tick_count == SORT_TICK_INTERVAL:
 			input_list = bubble_sort_single_iter(input_list)
 			tick_count = 0
@@ -83,7 +94,9 @@ def main():
 		WINDOW_SURFACE.fill(WHITE)
 		visualize_list(WINDOW_SURFACE, input_list)
 		draw_title(WINDOW_SURFACE)
+
 		pygame.display.update()
+
 		clock.tick(MAX_FPS)
 		print(f"FPS: {clock.get_fps()}", end="\r")
 		tick_count += 1
