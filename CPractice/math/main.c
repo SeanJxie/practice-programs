@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include "custommath.h"
 
-/*
- * Bunch of math code.
- */
 
 int main() {
     const int MAX = 40;
