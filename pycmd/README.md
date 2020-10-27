@@ -1,1 +1,1 @@
-A simple command line application in written Python. Commands are added in a modular pattern.
+A simple command line application written in Python. Commands are added in a modular pattern.
