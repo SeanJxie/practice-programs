@@ -1,58 +1,43 @@
-from pycmd import commands
+from pycmd import commands, ui_utils
+
+from time import sleep
+
+
+# TODO: Update commandDesc dict to include "format" key so there is no need to reference with string literals
+# TODO: Generalize errors
 
 
 class PyCMD:
     def __init__(self):
-
-        self.commandDesc = {
-            "HELP": {
-                "desc": "Show all commands. Format: {NONE}",
-                "func": commands.HelpCmd
-            },
-            "SORT": {
-                "desc": "Sort an input list of space separated numbers. Format: {A} {B} {C} ... {N}",
-                "func": commands.SortCMD
-            },
-            "EXIT": {
-                "desc": "Exit the program. Format: {NONE}",
-                "func": commands.ExitCMD
-            },
-            "CDIR": {
-                "desc": "Change the working directory to the input directory (absolute path). "
-                        f"'{commands.MACROCHAR}' can be used as a macro for the working directory path. "
-                        "Format: {DIR NAME}",
-                "func": commands.CDirCMD
-            },
-            "MDIR": {
-                "desc": "Make a new input directory in the working directory. Format: {DIR NAME}",
-                "func": commands.MDirCMD
-            },
-            "RANK": {
-                "desc": "Find the rank of a League of Legends player. Format: {REGION} {NAME}",
-                "func": commands.RankCMD
-            }
-        }
-
-    def main(self):
-        while 1:
+        while 1:  # Main loop
             user_input = input(f"<{commands.workingDir}> COMMAND: ")
+            command = user_input[:4].upper()  # Commands are always 4 letters
 
             try:
-                try:
-                    command_input = user_input[user_input.index(' '):].strip()  # index() raises error whereas find() returns -1
-                    command = user_input[:user_input.index(' ')].strip().upper()
-                except ValueError:
-                    command = user_input.upper()
-                    self.commandDesc[command]["func"](None).function()
+                if commands.commandDesc[command]["func"](None).takesInput:
+
+                    try:
+                        command_input = user_input[user_input.index(' '):].strip()
+                        commands.commandDesc[command]["func"](command_input).function()
+
+                    except ValueError:
+                        print(ui_utils.NO_INPUT_ERROR)
+
                 else:
-                    self.commandDesc[command]["func"](command_input).function()
+                    commands.commandDesc[command]["func"](None).function()
+
             except KeyError:
-                print("Error: invalid command.")
+                print(ui_utils.INVALID_COMMAND_ERROR)
 
             print("-----")  # End of sequence
 
 
 if __name__ == '__main__':
-    print('Welcome to PyCMD! Enter the command "HELP" to get started.\n')
-    programInstance = PyCMD()
-    programInstance.main()
+    print(ui_utils.INTRO + '\n')
+
+    try:
+        PyCMD()
+
+    except Exception as e:
+        ui_utils.raise_unaccounted_error(e)
+        sleep(2)

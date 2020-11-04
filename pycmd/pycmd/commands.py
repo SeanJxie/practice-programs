@@ -1,10 +1,8 @@
-from pycmd.main import PyCMD
+from pycmd import ui_utils
 
-import sys
 import os
 
 from urllib.request import urlopen
-from urllib.error import URLError
 from bs4 import BeautifulSoup
 
 workingDir = os.path.abspath(os.getcwd())
@@ -18,14 +16,20 @@ class Command:
 
     """
 
-    def __init__(self, i, default, takes_input=False):  # Don't see use for default param. Might remove.
+    def __init__(self, i, call_name, takes_input=False):
+        self.takesInput = takes_input
+        self.call_name = call_name
+
+        if self.call_name not in commandDesc.keys():  # For debug
+            print("Command has not been implemented in commandDesc.")
+            exit()
+
         if takes_input:
-            if i is None:
-                self.default_input = default
-            else:
-                self.default_input = i
-        else:
-            self.default_input = default
+            self.input = i
+
+    @property
+    def accepts_input(self):
+        return self.takesInput
 
     def function(self):
         ...
@@ -39,12 +43,13 @@ class HelpCmd(Command):
     """
 
     def __init__(self, i):
-        super().__init__(i, default=PyCMD().commandDesc, takes_input=False)  # Special case: takes input from main
+        super().__init__(i, "HELP", takes_input=False)  # Special case: takes input from main
 
     def function(self) -> None:
         print("Available Commands:")
-        for k in self.default_input.keys():
-            print(f"{k} : {self.default_input[k]['desc']}")
+        for k in commandDesc.keys():
+            print(f"{k}: {commandDesc[k]['desc']}")
+            print(f"      Format: {commandDesc[k]['form']}\n")
 
 
 class SortCMD(Command):
@@ -55,7 +60,7 @@ class SortCMD(Command):
     """
 
     def __init__(self, i):
-        super().__init__(i, default=None, takes_input=True)
+        super().__init__(i, "SORT", takes_input=True)
         self.iter = []
 
     def _bubble_sort(self) -> list:
@@ -70,14 +75,14 @@ class SortCMD(Command):
         return self.iter
 
     def function(self) -> None:
-        if self.default_input is None:
-            print("Error: No input arguments found.")
+        if self.input is None:
+            ui_utils.raise_syntax_error(self)
         else:
             try:
-                self.iter = [float(n) for n in self.default_input.split(' ')]  # Split input by ' ' char
+                self.iter = [float(n) for n in self.input.split(' ')]  # Split input by ' ' char
                 print(f"Sorted: {self._bubble_sort()}")
-            except ValueError:  # More specific, custom error message
-                print("Error: input syntax incorrect. Numbers should be separated by spaces. Format: {A} {B} {C} ... {N}")
+            except ValueError:
+                ui_utils.raise_syntax_error(self)  # Try to eliminate use of both error calls
 
 
 class ExitCMD(Command):
@@ -88,7 +93,7 @@ class ExitCMD(Command):
     """
 
     def __init__(self, i):
-        super().__init__(i, default=None, takes_input=False)
+        super().__init__(i, "EXIT", takes_input=False)
 
     def function(self) -> None:
         exit()
@@ -102,17 +107,17 @@ class CDirCMD(Command):
     """
 
     def __init__(self, i):
-        super().__init__(i, default=None, takes_input=True)
+        super().__init__(i, "CDIR", takes_input=True)
 
     def function(self) -> None:
         global workingDir
 
-        path = str(self.default_input).replace(MACROCHAR, workingDir)
+        path = str(self.input).replace(MACROCHAR, workingDir)
 
         if os.path.isdir(path):  # '?' is macro for cwd
             workingDir = path
         else:
-            print("Error: invalid directory change.")
+            print(ui_utils.INVALID_DIR_ERROR)
 
 
 class MDirCMD(Command):
@@ -123,12 +128,12 @@ class MDirCMD(Command):
     """
 
     def __init__(self, i):
-        super().__init__(i, default=None, takes_input=True)
+        super().__init__(i, "MDIR", takes_input=True)
 
     def function(self) -> None:
         try:
-            os.mkdir(os.path.join(workingDir, self.default_input))
-        except Exception as e:
+            os.mkdir(os.path.join(workingDir, self.input))
+        except Exception as e:  # No
             print(e)
 
 
@@ -140,38 +145,32 @@ class RankCMD(Command):
     """
 
     def __init__(self, i):
-        super().__init__(i, default=None, takes_input=True)
-        print("Fetching data...")
+        super().__init__(i, "RANK", takes_input=True)
 
-    def function(self):
+    def function(self) -> None:
         try:
-            region, name = self.default_input.split()
+            print("Fetching data...")
+            http_response_obj = urlopen(f"https://na.op.gg/summoner/userName={self.input}")  # Get HTML object
 
-            try:
-                http_response_obj = urlopen(f"https://{region}.op.gg/summoner/userName={name}")  # Get HTML object
+            html_str = http_response_obj.read().decode("utf-8")  # Take HTML as string
+            s = BeautifulSoup(html_str, "html.parser")  # Parse the string
 
-                html_str = http_response_obj.read().decode("utf-8")  # Take HTML as string
-                s = BeautifulSoup(html_str, "html.parser")  # Parse the string
+            trueNameTag = str(s.find_all("span", {"class": "Name"}))  # Get correct capitalization
+            rankTag = str(s.find_all("div", {"class": "TierRank"}))  # Find string content of <div class=TierRank ... </div> tag
 
-                trueNameTag = str(s.find_all("span", {"class": "Name"}))  # Get correct capitalization
-                rankTag = str(s.find_all("div", {"class": "TierRank"}))  # Find string content of <div class=TierRank ... </div> tag
+            nameIdx1, nameIdx2 = self._extract(trueNameTag)
+            rankIdx1, rankIdx2 = self._extract(rankTag)
 
-                nameIdx1, nameIdx2 = self._extract(trueNameTag)
-                rankIdx1, rankIdx2 = self._extract(rankTag)
+            if rankTag[rankIdx1: rankIdx2] == '[':
+                print(ui_utils.PLAYER_DNE_ERROR)
+            else:
+                print(f"{trueNameTag[nameIdx1: nameIdx2].strip()} is currently {rankTag[rankIdx1: rankIdx2].strip()}.")
 
-                if rankTag[rankIdx1: rankIdx2] == '[':
-                    print("Error: player does no exist.")
-                else:
-                    print(f"{trueNameTag[nameIdx1: nameIdx2]} is currently {rankTag[rankIdx1: rankIdx2].strip()}.")
-
-            except URLError:
-                print("Error: invalid region code.")
-
-        except ValueError:
-            print("Error: input syntax incorrect. Format: {REGION} {NAME}")
+        except AttributeError:
+            ui_utils.raise_syntax_error(self)
 
     @staticmethod
-    def _extract(tag):
+    def _extract(tag) -> (int, int):
         # In the case of profiles of pro players, format is:
         # [<span class="Name"> OFFICIAL NAME </span> <span class="Name"> ACCOUNT NAME </span>]
         # So, to find the '>' for the ACCOUNT NAME, we reverse search, avoiding the '>' at the end by
@@ -180,3 +179,38 @@ class RankCMD(Command):
         idx2 = tag.rfind('<')
 
         return idx1, idx2
+
+
+# Command info -----
+commandDesc = {
+    "HELP": {
+        "desc": "Show all commands.",
+        "func": HelpCmd,
+        "form": "{NONE}"
+    },
+    "SORT": {
+        "desc": "Sort an input list of space separated numbers.",
+        "func": SortCMD,
+        "form": " {A} {B} {C} ... {N}"
+    },
+    "EXIT": {
+        "desc": "Exit the program.",
+        "func": ExitCMD,
+        "form": "{NONE}"
+    },
+    "CDIR": {
+        "desc": f"Change the working directory to the input directory (absolute path). (Macro '{MACROCHAR}' for CWD)",
+        "func": CDirCMD,
+        "form": "{FULL DIR PATH}"
+    },
+    "MDIR": {
+        "desc": "Make a new input directory in the working directory.",
+        "func": MDirCMD,
+        "form": "{DIR PATH FROM CWD}"
+    },
+    "RANK": {
+        "desc": "Find the rank of a League of Legends player.",
+        "func": RankCMD,
+        "form": "{NAME}"
+    }
+}
