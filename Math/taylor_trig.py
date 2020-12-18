@@ -45,10 +45,10 @@ def maclaurin_cos(v, n_terms):
 
     # f^n(0) for f(x) = cos(x) cycles through the following sequence:
     derivative_seq = (
-        1,  # sin(0)
-        0,  # cos(0)
-        -1,  # -sin(0)
-        0,  # -cos(0)
+        1,  # cos(0)
+        0,  # -sin(0)
+        -1,  # -cos(0)
+        0,  # sin(0)
     )
     approx = 0
     for n in range(n_terms + 1):
