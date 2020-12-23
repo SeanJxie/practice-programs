@@ -14,4 +14,6 @@ int IsPrime(int n);
 
 int Fibonacci(int t); // MAX 2147483647
 
+double riemann_sum(double (*f)(double), int a, int b, int n);
+
 #endif //MATH_CUSTOMMATH_H

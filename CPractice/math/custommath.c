@@ -66,3 +66,12 @@ int Fibonacci(int t) {
 
     return curr;
 }
+
+
+double riemann_sum(double (*f)(double), int a, int b, int n) {
+    double delta_x = (double) (b - a) / n, area = 0;
+    for (int i = 1; i <= n; i++) {
+        area = area + f(a + i * delta_x) * delta_x;
+    }
+    return area;
+}
