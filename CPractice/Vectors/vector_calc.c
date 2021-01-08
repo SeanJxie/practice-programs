@@ -6,7 +6,7 @@
 
 #define INPUT_BUFFER 10
 
-typedef union {
+typedef struct {
     float f;
     Vector3D vec;
     char current_type;
@@ -44,17 +44,17 @@ int main() {
             fgets(input, INPUT_BUFFER, stdin);
             v2.z = atof(input);
 
-            if (toupper(*input) == *"ADD") {
+            if (toupper(*cmd) == *"ADD") {
                 return_value.vec = add_vec(v1, v2);
-                return_value.current_type = 'F';
+                return_value.current_type = 'V';
             } 
-            
-            else if (toupper(*input) == *"SUB") {
+
+            else if (toupper(*cmd) == *"SUB") {
                 return_value.vec = sub_vec(v1, v2);
                 return_value.current_type = 'V';
             }
 
-            else if (toupper(*input) == *"DOT") {
+            else if (toupper(*cmd) == *"DOT") {
                 return_value.f = dot(v1, v2);
                 return_value.current_type = 'F';
             }
@@ -73,7 +73,7 @@ int main() {
                 printf("RESULT: ");
                 printf("%f\n", return_value.f);
             }
-            
+        
         } 
 
         else if (toupper(*cmd) == *"NORM" || toupper(*cmd) == *"MAG") {
