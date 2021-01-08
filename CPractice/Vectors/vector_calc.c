@@ -48,14 +48,17 @@ int main() {
                 return_value.vec = add_vec(v1, v2);
                 return_value.current_type = 'F';
             } 
+            
             else if (toupper(*input) == *"SUB") {
                 return_value.vec = sub_vec(v1, v2);
                 return_value.current_type = 'V';
             }
+
             else if (toupper(*input) == *"DOT") {
                 return_value.f = dot(v1, v2);
                 return_value.current_type = 'F';
             }
+
             else {
                 return_value.vec = cross(v1, v2);
                 return_value.current_type = 'V';
@@ -65,12 +68,14 @@ int main() {
                 printf("RESULT: ");
                 print_vec(return_value.vec);        
             }
+
             else {
                 printf("RESULT: ");
                 printf("%f\n", return_value.f);
             }
             
         } 
+
         else if (toupper(*cmd) == *"NORM" || toupper(*cmd) == *"MAG") {
             printf("Enter x-value of vector: ");
             fgets(input, INPUT_BUFFER, stdin);
@@ -87,6 +92,7 @@ int main() {
                 printf("RESULT: ");
                 print_vec(normalize(v1));    
             }
+
             else {
                 printf("RESULT: ");
                 printf("%f\n", magnitude(v1)); 
