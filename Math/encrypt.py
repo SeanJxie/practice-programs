@@ -26,7 +26,7 @@ def decrypt(cipher, key):
 
     msg = ''
     for i in range(len(cipher)):
-        msg += ALPHABET[(ALPHABET.find(cipher[i]) - (ALPHABET.find(key[i]) + 1)) % len(ALPHABET)]
+        msg += ALPHABET[(ALPHABET.find(cipher[i]) - (ALPHABET.find(key[i]) + 1))]
 
     return msg
 
