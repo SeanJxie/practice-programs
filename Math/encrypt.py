@@ -38,8 +38,9 @@ property can be "quantized" is referred to as "the hypothesis of quantization".
 rand_key = ''.join(random.choice(ALPHABET) for _ in range(len(msg))) # Generate a random key the same length as the message.
 
 cipher = encrypt(msg, rand_key) # Encrypt the message with the random key.
+message = decrypt(cipher, rand_key) # Decrypt the message with the random key.
 
-print(cipher)
-
-print(decrypt(cipher, rand_key)) # Decrypt the message with the random key.
-
+# Display.
+print(f"Key={rand_key}")
+print(f"Cipher={cipher}")
+print(f"Message={message}") 
