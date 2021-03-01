@@ -3,6 +3,7 @@ import sys
 import math
 import random
 
+import load_obj
 import matrix
 
 WINWT = 2560
@@ -68,10 +69,9 @@ def main():
     ANGLE            = [0, 0, 0]
     IMAGE_PLANE      = [0, 0, 1]
 
-    #vertices = load_obj.get_v_list("spoon.obj")
-    vertices = [
-        [random.randint(0, 100) for _ in range(3)] for _ in range(100)
-    ]
+    x_ax = [(x, 0, 0) for x in range(-100, 100, 10)]
+    y_ax = [(0, y, 0) for y in range(-100, 100, 10)]
+    z_ax = [(0, 0, z) for z in range(-100, 100, 10)]
 
     up = False
     down = False
@@ -155,9 +155,9 @@ def main():
             ANGLE[2] += rspeed
 
 
-        MAIN_SURFACE.fill((0, 0, 0))
+        MAIN_SURFACE.fill((255, 255, 255))
 
-        for p in vertices:
+        for p in x_ax + y_ax + z_ax:
             proj = camera_transform(
                 p, 
                 CAMERA_POS, 
@@ -169,7 +169,7 @@ def main():
                 x = (proj.get(0, 0) - IMAGE_PLANE[0]) * (IMAGE_PLANE[2] / dz)
                 y = (proj.get(1, 0) - IMAGE_PLANE[1]) * (IMAGE_PLANE[2] / dz)
 
-                pg.draw.circle(MAIN_SURFACE, [random.randint(0, 255) for _ in range(3)], (x * 50, y * 50), 5)
+                pg.draw.circle(MAIN_SURFACE, (0, 0, 0), (x * 50, y * 50), 5)
     
         pg.display.update()
 
