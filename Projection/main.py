@@ -3,7 +3,6 @@ import sys
 import math
 import random
 
-import load_obj
 import matrix
 
 WINWT = 2560
