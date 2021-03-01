@@ -65,13 +65,13 @@ def camera_transform(proj_point, cam, theta):
 
 
 def main():
-    CAMERA_POS       = [0, 0, -1]
+    CAMERA_POS       = [0, 0, 0]
     ANGLE            = [0, 0, 0]
-    IMAGE_PLANE      = [0, 0, 1]
+    IMAGE_PLANE      = [0, 0, 1000]
 
-    x_ax = [(x, 0, 0) for x in range(-100, 100, 10)]
-    y_ax = [(0, y, 0) for y in range(-100, 100, 10)]
-    z_ax = [(0, 0, z) for z in range(-100, 100, 10)]
+    x_ax = [(x, 0, 0) for x in range(-10, 10)]
+    y_ax = [(0, y, 0) for y in range(-10, 10)]
+    z_ax = [(0, 0, z) for z in range(-10, 10)]
 
     up = False
     down = False
@@ -84,7 +84,7 @@ def main():
     pitch = False
     roll = False
 
-    speed = 1
+    speed = 0.1
     rspeed = 0.01
 
     while 1:
@@ -113,6 +113,10 @@ def main():
                     pitch = True
                 elif event.key == pg.K_c:
                     roll = True
+
+                elif event.key == pg.K_i:
+                    IMAGE_PLANE[2] += 1
+
 
             elif event.type == pg.KEYUP:
                 if event.key == pg.K_RIGHT:
@@ -148,10 +152,10 @@ def main():
         if m_out: 
             CAMERA_POS[2] -= speed
         if yaw:
-            ANGLE[0] += rspeed
+            ANGLE[0] -= rspeed
         if pitch:
-            ANGLE[1] += rspeed
-        if pitch:
+            ANGLE[1] -= rspeed
+        if roll:
             ANGLE[2] += rspeed
 
 
@@ -169,7 +173,7 @@ def main():
                 x = (proj.get(0, 0) - IMAGE_PLANE[0]) * (IMAGE_PLANE[2] / dz)
                 y = (proj.get(1, 0) - IMAGE_PLANE[1]) * (IMAGE_PLANE[2] / dz)
 
-                pg.draw.circle(MAIN_SURFACE, (0, 0, 0), (x * 50, y * 50), 5)
+                pg.draw.circle(MAIN_SURFACE, (0, 0, 0), (x, y), 5)
     
         pg.display.update()
 
