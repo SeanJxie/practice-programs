@@ -37,13 +37,14 @@ class M3xN:
         return str(self._elems)
 
     def __mul__(self, o):
-        res_mat = M3xN(o.n)
         if type(o) != M3xN:
+            res_mat = self
             for i in range(3):
                 for j in range(self.n):
                     res_mat.set(i, j, self._elems[i][j] * o)
 
         else:
+            res_mat = M3xN(o.n)
             for i in range(3):
                 for j in range(o.n):
                     row = self._get_row(i)
@@ -53,7 +54,7 @@ class M3xN:
         return res_mat
 
     def __add__(self, m):
-        res_mat = M3xN(self.n)
+        res_mat = self
 
         for i in range(3):
             for j in range(self.n):
@@ -62,7 +63,7 @@ class M3xN:
         return res_mat
 
     def __sub__(self, m):
-        res_mat = M3xN(self.n)
+        res_mat = self
 
         for i in range(3):
             for j in range(self.n):
